@@ -3,3 +3,5 @@ uvicorn==0.13.1
 asyncpg==0.21.0
 tortoise-orm==0.16.18
 aerich==0.4.2
+pytest==6.2.0
+requests==2.25.0
