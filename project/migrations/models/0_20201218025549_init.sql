@@ -1,0 +1,13 @@
+##### upgrade #####
+CREATE TABLE IF NOT EXISTS "quote" (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "quote" TEXT NOT NULL,
+    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+    "url" TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS "aerich" (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "version" VARCHAR(255) NOT NULL,
+    "app" VARCHAR(20) NOT NULL,
+    "content" TEXT NOT NULL
+);
