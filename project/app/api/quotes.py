@@ -1,9 +1,10 @@
+from typing import List
+
 from fastapi import APIRouter, HTTPException
 
 from app.api import crud
 from app.models.pydantic import QuotePayloadSchema, QuoteResponseSchema
 from app.models.tortoise import QuoteSchema
-from typing import List
 
 router = APIRouter()
 
@@ -12,10 +13,7 @@ router = APIRouter()
 async def create_quote(payload: QuotePayloadSchema) -> QuoteResponseSchema:
     quote_id = await crud.post(payload)
 
-    response_objet = {
-        "id": quote_id,
-        "value": payload.value
-    }
+    response_objet = {"id": quote_id, "value": payload.value}
     return response_objet
 
 
