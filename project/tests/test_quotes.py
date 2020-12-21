@@ -1,7 +1,5 @@
 import json
 
-import pytest
-
 
 def test_create_quote(test_app_with_db):
     response = test_app_with_db.post("/quotes/", data=json.dumps({"value": "foobar"}))
