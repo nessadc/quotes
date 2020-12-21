@@ -16,7 +16,7 @@ def test_create_quotes_invalid_json(test_app):
             {
                 "loc": ["body", "value"],
                 "msg": "field required",
-                "type": "value_error.missing"
+                "type": "value_error.missing",
             }
         ]
     }
