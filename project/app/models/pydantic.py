@@ -7,3 +7,7 @@ class QuotePayloadSchema(BaseModel):
 
 class QuoteResponseSchema(QuotePayloadSchema):
     id: int
+
+
+class QuoteUpdatePayloadSchema(QuotePayloadSchema):
+    value: str

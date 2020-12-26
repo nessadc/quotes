@@ -20,3 +20,16 @@ async def get(id: int) -> Union[dict, None]:
 async def get_all() -> List:
     quotes = await Quote.all().values()
     return quotes
+
+
+async def delete(id: int) -> int:
+    quote = await Quote.filter(id=id).first().delete()
+    return quote
+
+
+async def put(id: int, payload: QuotePayloadSchema) -> Union[dict, None]:
+    quote = await Quote.filter(id=id).update(value=payload.value)
+    if quote:
+        updated_quote = await Quote.filter(id=id).first().values()
+        return updated_quote[0]
+    return None
