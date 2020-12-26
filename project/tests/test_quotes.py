@@ -2,9 +2,7 @@ import json
 
 
 def test_create_quote(test_app_with_db):
-    response = test_app_with_db.post(
-        "/quotes/", data=json.dumps({"value": "foobar"})
-    )
+    response = test_app_with_db.post("/quotes/", data=json.dumps({"value": "foobar"}))
 
     assert response.status_code == 201
     assert response.json()["value"] == "foobar"
@@ -25,9 +23,7 @@ def test_create_quotes_invalid_json(test_app):
 
 
 def test_read_quote(test_app_with_db):
-    response = test_app_with_db.post(
-        "/quotes/", data=json.dumps({"value": "foobar"})
-    )
+    response = test_app_with_db.post("/quotes/", data=json.dumps({"value": "foobar"}))
     quote_id = response.json()["id"]
 
     response = test_app_with_db.get(f"/quotes/{quote_id}/")
@@ -59,9 +55,7 @@ def test_read_quote_incorrect_id(test_app_with_db):
 
 
 def test_read_all_quotes(test_app_with_db):
-    response = test_app_with_db.post(
-        "/quotes/", data=json.dumps({"value": "foobar"})
-    )
+    response = test_app_with_db.post("/quotes/", data=json.dumps({"value": "foobar"}))
     quote_id = response.json()["id"]
 
     response = test_app_with_db.get("/quotes/")
@@ -72,9 +66,7 @@ def test_read_all_quotes(test_app_with_db):
 
 
 def test_remove_quote(test_app_with_db):
-    response = test_app_with_db.post(
-        "/quotes/", data=json.dumps({"value": "foobar"})
-    )
+    response = test_app_with_db.post("/quotes/", data=json.dumps({"value": "foobar"}))
     quote_id = response.json()["id"]
 
     response = test_app_with_db.delete(f"/quotes/{quote_id}/")
@@ -102,14 +94,11 @@ def test_remove_quote_incorrect_id(test_app_with_db):
 
 
 def test_update_quote(test_app_with_db):
-    response = test_app_with_db.post(
-        "/quotes/", data=json.dumps({"value": "foobar"})
-    )
+    response = test_app_with_db.post("/quotes/", data=json.dumps({"value": "foobar"}))
     quote_id = response.json()["id"]
 
     response = test_app_with_db.put(
-        f"/quotes/{quote_id}/",
-        data=json.dumps({"value": "fizzbuzz"})
+        f"/quotes/{quote_id}/", data=json.dumps({"value": "fizzbuzz"})
     )
     assert response.status_code == 200
 
@@ -121,23 +110,17 @@ def test_update_quote(test_app_with_db):
 
 def test_update_quotes_incorrect_id(test_app_with_db):
     response = test_app_with_db.put(
-        "/quotes/999/",
-        data=json.dumps({"value": "foobar", "quote": "updated!"})
+        "/quotes/999/", data=json.dumps({"value": "foobar", "quote": "updated!"})
     )
     assert response.status_code == 404
     assert response.json()["detail"] == "Quote not found"
 
 
 def test_update_quotes_invalid_json(test_app_with_db):
-    response = test_app_with_db.post(
-        "/quotes/", data=json.dumps({"value": "foobar"})
-    )
+    response = test_app_with_db.post("/quotes/", data=json.dumps({"value": "foobar"}))
     quote_id = response.json()["id"]
 
-    response = test_app_with_db.put(
-        f"/quotes/{quote_id}/",
-        data=json.dumps({})
-    )
+    response = test_app_with_db.put(f"/quotes/{quote_id}/", data=json.dumps({}))
     assert response.status_code == 422
     assert response.json() == {
         "detail": [
@@ -151,14 +134,11 @@ def test_update_quotes_invalid_json(test_app_with_db):
 
 
 def test_update_quotes_invalid_keys(test_app_with_db):
-    response = test_app_with_db.post(
-        "/quotes/", data=json.dumps({"value": "foobar"})
-    )
+    response = test_app_with_db.post("/quotes/", data=json.dumps({"value": "foobar"}))
     quote_id = response.json()["id"]
 
     response = test_app_with_db.put(
-        f"/quotes/{quote_id}/",
-        data=json.dumps({"vlue": "fizzbuzz"})
+        f"/quotes/{quote_id}/", data=json.dumps({"vlue": "fizzbuzz"})
     )
     assert response.status_code == 422
     assert response.json() == {
