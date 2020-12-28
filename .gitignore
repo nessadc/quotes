@@ -3,3 +3,4 @@ venv
 htmlcov/
 .coverage
 .vscode/
+.DS_STORE
